@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+<body class="min-h-screen font-sans antialiased bg-base-200">
     {{-- You could elaborate the layout here --}}
     {{-- The important part is to have a different layout from the main app layout --}}
     <x-main full-width>
