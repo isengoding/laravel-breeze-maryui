@@ -25,7 +25,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
 <div>
     <div class="flex justify-end">
         <x-theme-toggle class="btn btn-circle btn-ghost" />
-
     </div>
     <div class="md:w-96 mx-auto mt-20">
 
