@@ -13,7 +13,7 @@ Route::get('/logout', function () {
     return redirect('/');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('/', 'pages.dashboard');
     Volt::route('/dashboard', 'pages.dashboard')->name('dashboard');
 });

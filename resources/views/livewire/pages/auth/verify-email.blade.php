@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
-{
+new #[Layout('components.layouts.guest')] class extends Component {
     /**
      * Send an email verification notification to the user.
      */
@@ -34,25 +33,28 @@ new #[Layout('layouts.guest')] class extends Component
         $this->redirect('/', navigate: true);
     }
 }; ?>
-
 <div>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+    <div class="flex justify-end">
+        <x-theme-toggle class="btn btn-circle btn-ghost" />
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+    </div>
+    <div class="md:w-96 mx-auto mt-20">
+        <div class="mb-4 text-sm">
+            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
         </div>
-    @endif
 
-    <div class="mt-4 flex items-center justify-between">
-        <x-primary-button wire:click="sendVerification">
-            {{ __('Resend Verification Email') }}
-        </x-primary-button>
+        @if (session('status') == 'verification-link-sent')
+            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+            </div>
+        @endif
 
-        <button wire:click="logout" type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-            {{ __('Log Out') }}
-        </button>
+        <div class="mt-4 flex items-center justify-between">
+            <x-button label="Resend Verification Email" wire:click="sendVerification" icon="o-paper-airplane"
+                class="btn-primary" spinner="sendVerification" />
+            <x-button label="Log Out" wire:click="logout" class="btn-ghost" wire:click="logout" />
+
+        </div>
     </div>
+
 </div>
