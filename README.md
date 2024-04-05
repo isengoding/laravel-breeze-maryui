@@ -4,9 +4,7 @@ Laravel Breeze Livewire MaryUI Starter
 
 ## Installasi
 
-	```sh
 	git clone https://github.com/isengoding/laravel-breeze-maryui.git
-	```
 
 ## Screenshot
 - Login
