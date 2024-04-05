@@ -15,7 +15,7 @@
     {{-- NAVBAR mobile only --}}
     <x-nav sticky class="lg:hidden">
         <x-slot:brand>
-            <x-app-brand />
+            <div class="font-bold text-2xl text-center">App</div>
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden mr-3">
@@ -30,17 +30,29 @@
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
             {{-- BRAND --}}
-            <x-app-brand class="p-5 pt-3" />
+            <!-- HEADER -->
+            <x-header title="App" separator class="mt-5 px-2">
+
+            </x-header>
+            {{-- <x-app-brand class="p-5 pt-3" /> --}}
 
             {{-- MENU --}}
-            <x-menu activate-by-route>
+            <x-menu activate-by-route class="-mt-9">
 
                 {{-- User --}}
                 @if ($user = auth()->user())
-                    <x-menu-separator />
+                    {{-- <x-menu-separator /> --}}
 
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover
-                        class="-mx-2 !-my-2 rounded">
+                    <x-list-item :item="$user" no-separator no-hover class="-mx-2 !-my-2 rounded">
+                        <x-slot:value>
+                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                                x-on:profile-updated.window="name = $event.detail.name">
+                            </div>
+                        </x-slot:value>
+                        <x-slot:sub-value>
+                            <div x-data="{{ json_encode(['email' => auth()->user()->email]) }}" x-text="email"
+                                x-on:profile-updated.window="email = $event.detail.email"></div>
+                        </x-slot:sub-value>
                         <x-slot:actions>
                             <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff"
                                 no-wire-navigate link="/logout" />
@@ -50,7 +62,8 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Hello" icon="o-sparkles" link="/dashboard" />
+                <x-menu-item title="Dashboard" icon="o-home" link="/dashboard" />
+                <x-menu-item title="My Profile" icon="o-user-circle" link="/profile" />
 
                 <x-menu-sub title="Settings" icon="o-cog-6-tooth">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />

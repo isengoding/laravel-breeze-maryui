@@ -16,4 +16,6 @@ Route::get('/logout', function () {
 Route::middleware(['auth'])->group(function () {
     Volt::route('/', 'pages.dashboard');
     Volt::route('/dashboard', 'pages.dashboard')->name('dashboard');
+
+    Volt::route('/profile', 'pages.profile')->name('profile');
 });
