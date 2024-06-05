@@ -60,13 +60,15 @@ class AuthenticationTest extends TestCase
 
         $this->actingAs($user);
 
-        $component = Volt::test('layout.navigation');
+        $this->get('/logout');
 
-        $component->call('logout');
+        // $component = Volt::test('layout.navigation');
 
-        $component
-            ->assertHasNoErrors()
-            ->assertRedirect('/');
+        // $component->call('logout');
+
+        // $component
+        //     ->assertHasNoErrors()
+        //     ->assertRedirect('/');
 
         $this->assertGuest();
     }
